@@ -10,7 +10,6 @@ data=read_excel('c:\\Users\\vivek\\Desktop\\AFCsurvey.xlsx')
 " here is where I use filters to parse on one or more columns and get the numbers !!!, how many said what bla bla "
 " start of by eliminating the null value from receipient ID"
 
-
 AIfilter=(data.iloc[:,12].str.contains(('AI')))
 softwarefac=(data.iloc[:,11]=='Software Factory')
 nonull_rid=(data.iloc[:,0].notnull())
@@ -23,8 +22,11 @@ print(data[softwarefac & nonull_rid].shape)
 print(data[AIfilter & nonull_rid].shape)
 
 "total applied for both"
-print(data[(data.iloc[:,11]=='Software Factory') & (data.iloc[:,12].str.contains(('AI'))) & (data.iloc[:,0].notnull())].shape)
+print(data[softwarefac & AIfilter & nonull_rid].shape)
 
 "total applied to Software fac but didnt know about other program...."
 print(data[softwarefac & nonull_rid &dontknowotherprogram].shape)
+
+"use value_counts built in method , it gives some real breakdown into the specific column data"
+print(data.iloc[:,83].value_counts())
 
